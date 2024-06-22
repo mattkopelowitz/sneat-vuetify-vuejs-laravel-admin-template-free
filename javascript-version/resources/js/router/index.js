@@ -17,6 +17,10 @@ const router = createRouter({
           component: () => import('../pages/account-settings.vue'),
         },
         {
+          path: 'actual-revenue',
+          component: () => import('../pages/actual-revenue.vue'),
+        },
+        {
           path: 'typography',
           component: () => import('../pages/typography.vue'),
         },

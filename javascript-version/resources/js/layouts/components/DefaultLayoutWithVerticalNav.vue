@@ -106,6 +106,13 @@ const upgradeBanner = computed(() => {
       />
       <VerticalNavLink
         :item="{
+          title: 'Actual Revenue',
+          icon: 'bx-bar-chart-alt',
+          to: '/actual-revenue',
+        }"
+      />
+      <VerticalNavLink
+        :item="{
           title: 'Error',
           icon: 'bx-info-circle',
           to: '/no-existence',
