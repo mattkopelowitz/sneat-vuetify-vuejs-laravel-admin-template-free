@@ -39,13 +39,18 @@
       <VWindow v-model="activeTab" class="mt-5 disable-tab-transition">
       
         <h1>Actual Revenue</h1>
-        <div>
-          <label for="Period">Period </label>
-          <input type="date" placeholder="June 2024">
-          <button type="button" @click="searchRevenue">   
-                <box-icon type="" name='search'></box-icon>
+        <div class="period-search">
+          <div class="select">
+            <label for="Period">Period </label>
+            <input type="date" style="margin-left: 5px">
+            <button type="button" @click="searchRevenue">   
+            <box-icon type="" name='search'></box-icon>
           </button>
+          </div>
+          
+          
         </div>
+        
         
 
         <table>
@@ -84,4 +89,17 @@
       </VWindow>
     </div>
   </template>
+
+<style>
+  .period-search .select {
+    width: 100%;
+    max-width: 200px;
+    padding: 1px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+  }
+</style>
   
