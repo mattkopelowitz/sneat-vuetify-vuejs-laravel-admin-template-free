@@ -1,105 +1,136 @@
 <script setup>
-    import { useRoute } from 'vue-router'
-    import 'boxicons'
-    import AddActualRevenuePopup from '@layouts/components/AddActualRevenuePopup.vue'
-    import { ref } from 'vue'
+import { useRoute } from 'vue-router'
+import 'boxicons'
+import AddActualRevenuePopup from '@layouts/components/AddActualRevenuePopup.vue'
+import { ref } from 'vue'
 
-    const route = useRoute();
-    const activeTab = ref(route.params.tab);
+const route = useRoute();
+const activeTab = ref(route.params.tab);
 
-    const popupTrigger = ref(false);
-    const togglePopup = () => {
-      popupTrigger.value = !popupTrigger.value;
-    }
-
-  
+const popupTrigger = ref(false);
+const togglePopup = () => {
+  popupTrigger.value = !popupTrigger.value;
+}
 </script>
 
 <template>
-    <div>
-      <VTabs
-        v-model="activeTab"
-        show-arrows
+  <div>
+    <VTabs
+      v-model="activeTab"
+      show-arrows
+    >
+      <VTab
+        v-for="item in tabs"
+        :key="item.icon"
+        :value="item.tab"
       >
-        <VTab
-          v-for="item in tabs"
-          :key="item.icon"
-          :value="item.tab"
-        >
-          <VIcon
-            size="20"
-            start
-            :icon="item.icon"
-          />
-          {{ item.title }}
-        </VTab>
-      </VTabs>
-      <VDivider />
-  
-      <VWindow v-model="activeTab" class="mt-5 disable-tab-transition">
-      
+        <VIcon
+          size="20"
+          start
+          :icon="item.icon"
+        />
+        {{ item.title }}
+      </VTab>
+    </VTabs>
+    <VDivider />
+
+    <VWindow v-model="activeTab" class="mt-5 disable-tab-transition">
+      <div class="header">
         <h1>Actual Revenue</h1>
-        <div class="period-search">
-          <div class="select">
-            <label for="Period">Period </label>
-            <input type="date" style="margin-left: 5px">
-            <button type="button" @click="searchRevenue">   
-            <box-icon type="" name='search'></box-icon>
+      </div>
+
+      <div class="period-search">
+          <label for="period">Period</label>
+          <input type="date" id="period">
+          <button @click="searchRevenue">
+            <box-icon name="search"></box-icon>
           </button>
-          </div>
-          
-          
         </div>
-        
-        
 
-        <table>
+      <table class="revenue-table">
+        <thead>
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Period</th>
-            <th scope="col">Client</th>
-            <th scope="col">Development Area</th>
-            <th scope="col">Product</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Status</th>
-            <th scope="col">Notes</th>
+            <th>ID</th>
+            <th>Period</th>
+            <th>Client</th>
+            <th>Deployment Area</th>
+            <th>Product</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Notes</th>
           </tr>
-
-          <button type="button" @click="togglePopup">
-                <box-icon type='solid' name='plus-square'></box-icon>
-          </button>
-          
+        </thead>
+        <tbody>
           <tr>
-            <th scope="row">
-            
-            </th>
+            <td colspan="8">
+              <button @click="togglePopup" class="add-button">
+                <box-icon type="solid" name="plus-square"></box-icon>
+              </button>
+            </td>
           </tr>
+        </tbody>
+      </table>
 
-        </table>
+      <AddActualRevenuePopup v-if="popupTrigger" :togglePopup="togglePopup">
+        <h1>Add Actual Revenue</h1>
+      </AddActualRevenuePopup>
+    </VWindow>
+  </div>
+</template>
 
-        <div class="Add-Actual-Revenue-Popup">
-           <AddActualRevenuePopup v-if="popupTrigger" :togglePopup="() => togglePopup()">
-              <h1>Add Actual Revenue</h1>
-           </AddActualRevenuePopup>
-        </div>
-       
+<style scoped>
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.period-search {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 
-        
-      </VWindow>
-    </div>
-  </template>
+.period-search label {
+  font-weight: bold;
+}
 
-<style>
-  .period-search .select {
-    width: 100%;
-    max-width: 200px;
-    padding: 1px;
-    box-sizing: border-box;
-    border: 1px solid black;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-  }
+.period-search input {
+  margin-left: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.period-search button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.revenue-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.revenue-table th,
+.revenue-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.revenue-table th {
+  background-color: #f9f9f9;
+}
+
+.add-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  padding: 10px;
+}
 </style>
-  
