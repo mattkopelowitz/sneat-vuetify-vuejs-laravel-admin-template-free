@@ -62,13 +62,13 @@ const togglePopup = () => {
         </thead>
         <tbody>
           <tr>
-            <td colspan="8">
+          </tr>
+        </tbody>
+        <td colspan="8">
               <button @click="togglePopup" class="add-button">
                 <box-icon type="solid" name="plus-square"></box-icon>
               </button>
             </td>
-          </tr>
-        </tbody>
       </table>
 
       <AddActualRevenuePopup v-if="popupTrigger" :togglePopup="togglePopup">
@@ -104,8 +104,13 @@ const togglePopup = () => {
 
 .period-search button {
   background: none;
-  border: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   cursor: pointer;
+  align-items: center;
+  display: flex;
+  width: 30px;
+  height: 30px;
 }
 
 .revenue-table {

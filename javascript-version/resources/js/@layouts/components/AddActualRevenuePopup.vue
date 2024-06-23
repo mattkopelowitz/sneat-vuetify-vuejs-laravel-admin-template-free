@@ -140,6 +140,7 @@ export default {
 
 .form-group {
     margin-bottom: 15px;
+    width: 33%;
 }
 
 label {
